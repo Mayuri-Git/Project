@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600 64-bit) (preloaded format=pdflatex 2018.2.12)  7 MAR 2018 17:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600 64-bit) (preloaded format=pdflatex 2018.2.12)  7 MAR 2018 18:10
 entering extended mode
 **./proposal.tex
 (proposal.tex
@@ -283,41 +283,47 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 34.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 34.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 50.
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ú in font cmr10!
+Missing character: There is no ‚ in font cmr10!
+Missing character: There is no Ä in font cmr10!
+Missing character: There is no ù in font cmr10!
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 51.
 
 ("C:\Users\mayur\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 50.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 51.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 68.
+(Font)              <7> on input line 69.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 68.
+(Font)              <5> on input line 69.
 
-Overfull \hbox (78.53854pt too wide) in paragraph at lines 68--75
+Overfull \hbox (78.53854pt too wide) in paragraph at lines 69--76
 [][] 
  []
 
 
-LaTeX Warning: Citation `SJonesBeautifulConcc' undefined on input line 79.
+LaTeX Warning: Citation `SJonesBeautifulConcc' undefined on input line 80.
 
 (proposal.bbl
 
 LaTeX Warning: Empty `thebibliography' environment on input line 24.
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 83.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 84.
  [1
 
 {C:/Users/mayur/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 83.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 84.
 
 (proposal.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 83.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 83.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 84.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 84.
 Package rerunfilecheck Info: File `proposal.out' has not changed.
-(rerunfilecheck)             Checksum: 9895CFEEC81E749B05E8A6F307923F7C;147.
+(rerunfilecheck)             Checksum: 2670EBF04DEB117E619966A78B55743C;149.
 
 
 LaTeX Warning: There were undefined references.
@@ -325,8 +331,8 @@ LaTeX Warning: There were undefined references.
  ) 
 Here is how much of TeX's memory you used:
  5584 strings out of 493303
- 84327 string characters out of 3129784
- 181718 words of memory out of 3000000
+ 84234 string characters out of 3129784
+ 182718 words of memory out of 3000000
  9103 multiletter control sequences out of 15000+200000
  7280 words of font info for 26 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -337,7 +343,7 @@ blic/amsfonts/cm/cmr10.pfb><C:/Users/mayur/AppData/Local/Programs/MiKTeX 2.9/fo
 nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/mayur/AppData/Local/Programs/M
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/mayur/AppData/Loca
 l/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on proposal.pdf (1 page, 68031 bytes).
+Output written on proposal.pdf (1 page, 69705 bytes).
 PDF statistics:
  45 PDF objects out of 1000 (max. 8388607)
  6 named destinations out of 1000 (max. 500000)
