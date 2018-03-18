@@ -7,8 +7,8 @@
 3) compile all java files with: javac *.java
 
 4) run example with: 
-  a) java musiclang
-  b) (A,w)
-  c) control-d to exit
+  * java musiclang
+  * (A,w)
+  * control-d to exit
   
   
