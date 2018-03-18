@@ -1,0 +1,46 @@
+PARSER_BEGIN(musiclang)
+
+public class musiclang {
+
+  /** Main entry point. */
+  public static void main(String args[]) throws ParseException {
+    musiclang parser = new musiclang(System.in);
+    musiclang.Input();
+  }
+
+}
+
+PARSER_END(musiclang)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+}
+
+TOKEN :
+{
+  <L: "(">
+| <R: ")">
+| <C: ",">
+| < Pitch: ["A"-"Z"] >
+| < Duration: ["w","h","q"] >
+}
+
+/** Root production. */
+void Input() :
+{}
+{
+  NoteInput() <EOF>
+  
+}
+
+/** Brace matching production. */
+void NoteInput() :
+{Token token1; Token token2;}
+{
+  <L> token1=<Pitch> <C> token2=<Duration> <R>
+  { System.out.println("The input Pitch is: " + token1 + " The input Duration is: " + token2); }
+}
