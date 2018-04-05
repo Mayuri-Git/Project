@@ -1,0 +1,96 @@
+PARSER_BEGIN(musiclang)
+
+package musicLang;
+
+public class musiclang {
+
+  /** Main entry point. */
+  public static void main(String args[]) throws ParseException {
+    if (args.length == 0)
+    {
+        System.out.println("Reading input from command line");
+        musiclang parser = new musiclang(System.in);
+    }
+    else
+    {
+        System.out.println("Reading input from file as argument");
+        try {
+            musiclang parser = new musiclang(new java.io.FileInputStream(args[0]));
+          } catch (java.io.FileNotFoundException e) {
+            System.out.println("File not found.");
+            return;
+          }
+    }
+    musiclang.CompilationUnit();
+
+    System.out.println("Now playing music.");
+
+    Note a = new Note(Pitch.A,Duration.w);
+    Note b = new Note(Pitch.G,Duration.q);
+
+    Track myTrack = new Track("myTrack");
+
+    myTrack.appendNote(a);
+    myTrack.appendNote(b);
+
+    myTrack.setInstrument(musicLang.Instrument.HARMONICA);
+
+    myTrack.play();
+
+  }
+
+}
+
+PARSER_END(musiclang)
+
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+}
+
+TOKEN :
+{
+  <L: "(">
+| <R: ")">
+| <C: ",">
+| < PitchToken: ["A"-"Z"] >
+| < DurationToken: ["w","h","q"] >
+| < TrackToken: "@" >
+| < PlayToken: ">" >
+| < InstrumentIdToken: "i" >
+| < InstrumentNumToken: (["0"-"9"])+ >
+}
+
+void CompilationUnit() :
+{}
+{
+  TrackInput()
+  ( NoteInput() )*
+  ( PlayInput() )*
+  <EOF>
+  
+}
+
+void TrackInput() :
+{Token token1;}
+{
+  token1=<TrackToken>
+  { System.out.println("The track has begun: " + token1); }
+}
+
+void NoteInput() :
+{Token pitch; Token dur;}
+{
+  <L> pitch=<PitchToken> <C> dur=<DurationToken> <R>
+  { System.out.println("The input Pitch is: " + pitch + " The input Duration is: " + dur); }
+}
+
+void PlayInput() :
+{Token play; Token instType;}
+{
+  play=<PlayToken> <InstrumentIdToken> instType=<InstrumentNumToken>
+  { System.out.println("The track will be played on " + instType + " Instrument"); }
+}
