@@ -1,11 +1,35 @@
 package musicLang;
 
 public class Note {
-	private Pitch pitch;
 	private Duration duration;
+    private Pitch pitch;
 	
-	Note(Pitch p, Duration d){
-		this.pitch = p;
-		this.duration = d;		
+    public Note(Pitch pitch, Duration duration) {
+        this.duration = duration;
+        this.pitch = pitch;
+    }
+
+	public void setDuration(Duration dur) {
+		this.duration = dur;
 	}
+
+	public void setPitch(Pitch pitch) {
+		this.pitch = pitch;
+	}
+
+	public Duration getDuration() {
+		return duration;
+	}
+
+	public Pitch getPitch() {
+		return pitch;
+	}
+
+	public int getNoteNumber() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+
 }

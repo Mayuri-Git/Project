@@ -1,0 +1,128 @@
+Piano 1        #0
+Piano 2        #1
+Piano 3        #2
+Honky-tonk     #3
+E.Piano 1      #4
+E.Piano 2      #5
+Harpsichord    #6
+Clav.          #7
+Celesta        #8
+Glockenspiel   #9
+Music Box      #10
+Vibraphone     #11
+Marimba        #12
+Xylophone      #13
+Tubular-bell   #14
+Santur         #15
+Organ 1        #16
+Organ 2        #17
+Organ 3        #18
+Church Org.1   #19
+Reed Organ     #20
+Accordion Fr   #21
+Harmonica      #22
+Bandoneon      #23
+Nylon-str.Gt   #24
+Steel-str.Gt   #25
+Jazz Gt.       #26
+Clean Gt.      #27
+Muted Gt.      #28
+Overdrive Gt   #29
+DistortionGt   #30
+Gt.Harmonics   #31
+Acoustic Bs.   #32
+Fingered Bs.   #33
+Picked Bs.     #34
+Fretless Bs.   #35
+Slap Bass 1    #36
+Slap Bass 2    #37
+Synth Bass 1   #38
+Synth Bass 2   #39
+Violin         #40
+Viola          #41
+Cello          #42
+Contrabass     #43
+Tremolo Str    #44
+PizzicatoStr   #45
+Harp           #46
+Timpani        #47
+Strings        #48
+Slow Strings   #49
+Syn.Strings1   #50
+Syn.Strings2   #51
+Choir Aahs     #52
+Voice Oohs     #53
+SynVox         #54
+OrchestraHit   #55
+Trumpet        #56
+Trombone       #57
+Tuba           #58
+MutedTrumpet   #59
+French Horns   #60
+Brass 1        #61
+Synth Brass1   #62
+Synth Brass2   #63
+Soprano Sax    #64
+Alto Sax       #65
+Tenor Sax      #66
+Baritone Sax   #67
+Oboe           #68
+English Horn   #69
+Bassoon        #70
+Clarinet       #71
+Piccolo        #72
+Flute          #73
+Recorder       #74
+Pan Flute      #75
+Bottle Blow    #76
+Shakuhachi     #77
+Whistle        #78
+Ocarina        #79
+Square Wave    #80
+Saw Wave       #81
+Syn.Calliope   #82
+Chiffer Lead   #83
+Charang        #84
+Solo Vox       #85
+5th Saw Wave   #86
+Bass & Lead    #87
+Fantasia       #88
+Warm Pad       #89
+Polysynth      #90
+Space Voice    #91
+Bowed Glass    #92
+Metal Pad      #93
+Halo Pad       #94
+Sweep Pad      #95
+Ice Rain       #96
+Soundtrack     #97
+Crystal        #98
+Atmosphere     #99
+Brightness     #100
+Goblin         #101
+Echo Drops     #102
+Star Theme     #103
+Sitar          #104
+Banjo          #105
+Shamisen       #106
+Koto           #107
+Kalimba        #108
+Bagpipe        #109
+Fiddle         #110
+Shanai         #111
+Tinkle Bell    #112
+Agogo          #113
+Steel Drums    #114
+Woodblock      #115
+Taiko          #116
+Melo. Tom 1    #117
+Synth Drum     #118
+Reverse Cym.   #119
+Gt.FretNoise   #120
+Breath Noise   #121
+Seashore       #122
+Bird           #123
+Telephone 1    #124
+Helicopter     #125
+Applause       #126
+Gun Shot       #127

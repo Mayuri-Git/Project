@@ -6,18 +6,6 @@ import javax.sound.midi.Instrument;
 public class Sample1 {
 
 	public static void main(String[] args) {
-		
-		Note a = new Note(Pitch.A,Duration.w);
-		Note b = new Note(Pitch.G,Duration.q);
-		
-		Track myTrack = new Track("myTrack");
-		
-		myTrack.appendNote(a);
-		myTrack.appendNote(b);
-		
-		myTrack.setInstrument(musicLang.Instrument.HARMONICA);
-		
-		myTrack.play();
 
 		try{
         /* Create a new Sythesizer and open it. Most of
@@ -34,18 +22,14 @@ public class Sample1 {
 			final MidiChannel[] mChannels = midiSynth.getChannels();
 
 			mChannels[0].programChange(0);	// program change parameter changes instrument
-
-
+			
 			mChannels[0].noteOn(60, 100);//On channel 0, play note number 60 with velocity 100
 			try { Thread.sleep(5000); // wait time in milliseconds to control duration
 			} catch( InterruptedException e ) { }
 			mChannels[0].noteOff(60);//turn of the note
 			
 			
-			
-			
 			//analyzing different instruments
-			
 			
 			Instrument[] instruments = midiSynth.getDefaultSoundbank().getInstruments();
 			final MidiChannel[] channels = midiSynth.getChannels();
