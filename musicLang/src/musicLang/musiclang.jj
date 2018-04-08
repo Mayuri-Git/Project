@@ -2,10 +2,13 @@ PARSER_BEGIN(musiclang)
 
 package musicLang;
 
+import javax.sound.midi.MidiUnavailableException;
+import java.util.ArrayList;
+
 public class musiclang {
 
   /** Main entry point. */
-  public static void main(String args[]) throws ParseException {
+  public static void main(String args[]) throws ParseException, MidiUnavailableException {
     if (args.length == 0)
     {
         System.out.println("Reading input from command line");
@@ -21,21 +24,8 @@ public class musiclang {
             return;
           }
     }
+
     musiclang.CompilationUnit();
-
-    System.out.println("Now playing music.");
-
-    Note a = new Note(Pitch.A,Duration.w);
-    Note b = new Note(Pitch.G,Duration.q);
-
-    Track myTrack = new Track("myTrack");
-
-    myTrack.appendNote(a);
-    myTrack.appendNote(b);
-
-    myTrack.setInstrument(musicLang.Instrument.HARMONICA);
-
-    myTrack.play();
 
   }
 
@@ -64,33 +54,45 @@ TOKEN :
 | < InstrumentNumToken: (["0"-"9"])+ >
 }
 
-void CompilationUnit() :
-{}
+void CompilationUnit() throws MidiUnavailableException:
+{MusicTrack track;}
 {
-  TrackInput()
-  ( NoteInput() )*
-  ( PlayInput() )*
+  track = TrackInput()
+  ( track = NoteInput(track) )*
+  ( PlayInput(track) )*
   <EOF>
-  
+  {}
 }
 
-void TrackInput() :
-{Token token1;}
+MusicTrack TrackInput() :
+{Token trackTk; MusicTrack track;}
 {
-  token1=<TrackToken>
-  { System.out.println("The track has begun: " + token1); }
+  trackTk=<TrackToken>
+
+  {
+    System.out.println("The track has begun: " + trackTk);
+    track = new MusicTrack();
+    return track;
+    }
 }
 
-void NoteInput() :
-{Token pitch; Token dur;}
+MusicTrack NoteInput(MusicTrack track) :
+{Token pitch; Token dur; Note note;}
 {
   <L> pitch=<PitchToken> <C> dur=<DurationToken> <R>
-  { System.out.println("The input Pitch is: " + pitch + " The input Duration is: " + dur); }
+  { System.out.println("The input Pitch is: " + pitch + " The input Duration is: " + dur);
+    note = new Note(Pitch.valueOf(pitch.toString()), Duration.valueOf(dur.toString()));
+    track.addNote(note);
+    return track;
+  }
 }
 
-void PlayInput() :
+void PlayInput(MusicTrack track) throws MidiUnavailableException:
 {Token play; Token instType;}
 {
   play=<PlayToken> <InstrumentIdToken> instType=<InstrumentNumToken>
-  { System.out.println("The track will be played on " + instType + " Instrument"); }
+  { System.out.println("The track will be played on " + instType + " Instrument");
+    track.setInstrument(MusicInstrument.PIANO);
+    track.play();
+  }
 }
