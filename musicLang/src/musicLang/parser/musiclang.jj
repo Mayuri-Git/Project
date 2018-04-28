@@ -51,7 +51,7 @@ TOKEN :
 | < TrackToken: "@" >
 | < PlayToken: ">" >
 | < InstrumentIdToken: "i" >
-| < InstrumentNumToken: (["0"-"9"])+ >
+| < InstrumentNumToken: (["A"-"Z"])+ >
 }
 
 void CompilationUnit() throws MidiUnavailableException:
@@ -92,7 +92,8 @@ void PlayInput(MusicTrack track) throws MidiUnavailableException:
 {
   play=<PlayToken> <InstrumentIdToken> instType=<InstrumentNumToken>
   { System.out.println("The track will be played on " + instType + " Instrument");
-    track.setInstrument(MusicInstrument.PIANO);
+    track.setInstrument(MusicInstrument.valueOf(instType.toString()));
+    track.printNotes();
     track.play();
   }
 }
