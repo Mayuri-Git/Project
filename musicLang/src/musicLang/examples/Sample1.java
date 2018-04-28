@@ -1,4 +1,4 @@
-package musicLang;
+package musicLang.examples;
 
 import javax.sound.midi.*;
 import javax.sound.midi.Instrument;
@@ -23,9 +23,9 @@ public class Sample1 {
 
 			mChannels[0].programChange(0);	// program change parameter changes instrument
 			
-			mChannels[0].noteOn(60, 100);//On channel 0, play note number 60 with velocity 100
-			try { Thread.sleep(5000); // wait time in milliseconds to control duration
-			} catch( InterruptedException e ) { }
+			mChannels[0].noteOn(60, 5000);//On channel 0, play note number 60 with velocity 100
+//			try { //Thread.sleep(1000); // wait time in milliseconds to control duration
+//			} catch( InterruptedException e ) { }
 			mChannels[0].noteOff(60);//turn of the note
 			
 			
@@ -39,7 +39,7 @@ public class Sample1 {
 			
 			//steel drums
 			int instrument = 114;
-			int velocity = 100;
+			int velocity = 1000;
 			int note = 60;
 			
 			synth.loadInstrument(instruments[instrument]);
@@ -48,8 +48,8 @@ public class Sample1 {
 			System.out.println(instruments[instrument].getName());
 			
 			mChannels[0].noteOn(note, velocity);
-			try { Thread.sleep(5000); // wait time in milliseconds to control duration
-			} catch( InterruptedException e ) { }
+//			try {// Thread.sleep(5000); // wait time in milliseconds to control duration
+//			} catch( InterruptedException e ) { }
 			mChannels[0].noteOff(note);//turn of the note
 			
 			
