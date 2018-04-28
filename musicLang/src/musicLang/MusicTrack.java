@@ -29,22 +29,22 @@ public class MusicTrack {
 	final double warmup = 0.125;
 	
 	private final Map<Instrument, Integer> channels = new HashMap<>();
-	private final Synthesizer synthesizer;
+//	private final Synthesizer synthesizer;
 	
 	public ArrayList<Note> notes = new ArrayList<Note>();
 	
 	private Sequence sequence;
-	private final Sequencer sequencer;
-    private final Track track;
+//	private final Sequencer sequencer;
+//    private final Track track;
 	
 	public MusicTrack() throws MidiUnavailableException, InvalidMidiDataException {
-		synthesizer = MidiSystem.getSynthesizer();
-		synthesizer.open();
-		synthesizer.loadAllInstruments(synthesizer.getDefaultSoundbank());
-		this.sequencer = MidiSystem.getSequencer();
-		Sequence sequence = new Sequence(Sequence.PPQ, DEFAULT_TICKS_PER_BEAT);
-		this.track = sequence.createTrack();
-		sequencer.setSequence(sequence);
+//		synthesizer = MidiSystem.getSynthesizer();
+//		synthesizer.open();
+//		synthesizer.loadAllInstruments(synthesizer.getDefaultSoundbank());
+//		this.sequencer = MidiSystem.getSequencer();
+//		Sequence sequence = new Sequence(Sequence.PPQ, DEFAULT_TICKS_PER_BEAT);
+//		this.track = sequence.createTrack();
+//		sequencer.setSequence(sequence);
 	}
 	
 	public void addNote(Note n) {
@@ -52,17 +52,16 @@ public class MusicTrack {
 	}
 	
 	
-	public void play() throws MidiUnavailableException, InvalidMidiDataException {
+	public void play() throws MidiUnavailableException, InvalidMidiDataException, InterruptedException {
 		// TODO Auto-generated method stub
-	    
-		final MidiSequencePlayer player = new MidiSequencePlayer(120,2);
-		
+
+
 		for(Note note:notes) {
-			
+			final MidiSequencePlayer player = new MidiSequencePlayer(120,64);
 			player.addNote(note.instrument(), note.pitch(), warmup, note.duration());
-		
+			player.play();
 		}
-		player.play();	
+
 	}
 
 }
