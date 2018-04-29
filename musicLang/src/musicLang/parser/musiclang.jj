@@ -1,9 +1,11 @@
 PARSER_BEGIN(musiclang)
 
-package musicLang;
+package musicLang.parser;
 
 import javax.sound.midi.MidiUnavailableException;
 import java.util.ArrayList;
+
+import musicLang.*;
 
 public class musiclang {
 
@@ -55,7 +57,7 @@ TOKEN :
 }
 
 void CompilationUnit() throws MidiUnavailableException:
-{MusicTrack track;}
+{MusicTrack track; }
 {
   track = TrackInput()
   ( track = NoteInput(track) )*
@@ -64,25 +66,45 @@ void CompilationUnit() throws MidiUnavailableException:
   {}
 }
 
-MusicTrack TrackInput() :
+MusicTrack TrackInput() throws MidiUnavailableException:
 {Token trackTk; MusicTrack track;}
 {
   trackTk=<TrackToken>
 
   {
     System.out.println("The track has begun: " + trackTk);
+    try{
     track = new MusicTrack();
     return track;
     }
+    catch(Exception e)
+    {
+    e.printStackTrace();
+    }
+
+    }
 }
 
-MusicTrack NoteInput(MusicTrack track) :
+MusicTrack NoteInput(MusicTrack track) throws MidiUnavailableException:
 {Token pitch; Token dur; Note note;}
 {
   <L> pitch=<PitchToken> <C> dur=<DurationToken> <R>
   { System.out.println("The input Pitch is: " + pitch + " The input Duration is: " + dur);
-    note = new Note(Pitch.valueOf(pitch.toString()), Duration.valueOf(dur.toString()));
-    track.addNote(note);
+    switch(dur.toString())
+    {
+        case "w":
+        track.setDurations(1);
+        track.setPitches(new Pitch(pitch.toString().charAt(0)));
+        break;
+        case "h":
+        track.setDurations(0.5);
+        track.setPitches(new Pitch(pitch.toString().charAt(0)));
+        break;
+        case "q":
+        track.setDurations(0.25);
+        track.setPitches(new Pitch(pitch.toString().charAt(0)));
+        break;
+    }
     return track;
   }
 }
@@ -92,8 +114,26 @@ void PlayInput(MusicTrack track) throws MidiUnavailableException:
 {
   play=<PlayToken> <InstrumentIdToken> instType=<InstrumentNumToken>
   { System.out.println("The track will be played on " + instType + " Instrument");
-    track.setInstrument(MusicInstrument.valueOf(instType.toString()));
-    track.printNotes();
+    for(int i=0; i < track.pitches.size(); i++)
+    {
+        switch(instType.toString().toLowerCase())
+        {
+            case "piano":
+            track.addNote(new Note(track.durations.get(i), track.pitches.get(i), MusicInstrument.PIANO));
+            break;
+            case "drums":
+            track.addNote(new Note(track.durations.get(i), track.pitches.get(i), MusicInstrument.STEEL_DRUMS));
+            break;
+            case "harmonica":
+            track.addNote(new Note(track.durations.get(i), track.pitches.get(i), MusicInstrument.HARMONICA));
+            break;
+        }
+    }
+    try{
     track.play();
+    }catch(Exception e)
+    {
+        e.printStackTrace();
+    }
   }
 }

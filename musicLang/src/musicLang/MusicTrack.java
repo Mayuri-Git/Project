@@ -20,35 +20,35 @@ import javax.sound.midi.Track;
 import musicLang.MusicInstrument;
 
 public class MusicTrack {
-	public static final int DEFAULT_BEATS_PER_MINUTE = 120;
-	public static final int DEFAULT_TICKS_PER_BEAT = 64;
-	private static final int META_MARKER = 6;
-	private static final int DEFAULT_VELOCITY = 100;
-	private static final int META_END_OF_TRACK = 47;
-	
 	final double warmup = 0.125;
-	
-	private final Map<Instrument, Integer> channels = new HashMap<>();
-//	private final Synthesizer synthesizer;
-	
+	public ArrayList<Pitch> pitches = new ArrayList<Pitch>();
+	public ArrayList<Double> durations = new ArrayList<Double>();
 	public ArrayList<Note> notes = new ArrayList<Note>();
 	
 	private Sequence sequence;
-//	private final Sequencer sequencer;
-//    private final Track track;
 	
 	public MusicTrack() throws MidiUnavailableException, InvalidMidiDataException {
-//		synthesizer = MidiSystem.getSynthesizer();
-//		synthesizer.open();
-//		synthesizer.loadAllInstruments(synthesizer.getDefaultSoundbank());
-//		this.sequencer = MidiSystem.getSequencer();
-//		Sequence sequence = new Sequence(Sequence.PPQ, DEFAULT_TICKS_PER_BEAT);
-//		this.track = sequence.createTrack();
-//		sequencer.setSequence(sequence);
+
 	}
 	
 	public void addNote(Note n) {
 		this.notes.add(n);
+	}
+
+	public ArrayList<Pitch> getPitches() {
+		return pitches;
+	}
+
+	public ArrayList<Double> getDurations() {
+		return durations;
+	}
+
+	public void setPitches(Pitch p) {
+		this.pitches.add(p);
+	}
+
+	public void setDurations(double d) {
+		this.durations.add(d);
 	}
 	
 	
@@ -56,11 +56,14 @@ public class MusicTrack {
 		// TODO Auto-generated method stub
 
 
+
 		for(Note note:notes) {
 			final MidiSequencePlayer player = new MidiSequencePlayer(120,64);
 			player.addNote(note.instrument(), note.pitch(), warmup, note.duration());
+			Thread.sleep(500);
 			player.play();
 		}
+
 
 	}
 
