@@ -2,6 +2,7 @@ package musicLang;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.sound.midi.Instrument;
@@ -20,10 +21,10 @@ import javax.sound.midi.Track;
 import musicLang.MusicInstrument;
 
 public class MusicTrack {
-	final double warmup = 0.125;
-	public ArrayList<Pitch> pitches = new ArrayList<Pitch>();
-	public ArrayList<Double> durations = new ArrayList<Double>();
-	public ArrayList<Note> notes = new ArrayList<Note>();
+	public List<Pitch> pitches = new ArrayList<Pitch>();
+	public List<Double> durations = new ArrayList<Double>();
+	public List<Note> notes = new ArrayList<Note>();
+	public MusicInstrument instrument = null;
 	
 	private Sequence sequence;
 	
@@ -35,11 +36,11 @@ public class MusicTrack {
 		this.notes.add(n);
 	}
 
-	public ArrayList<Pitch> getPitches() {
+	public List<Pitch> getPitches() {
 		return pitches;
 	}
 
-	public ArrayList<Double> getDurations() {
+	public List<Double> getDurations() {
 		return durations;
 	}
 
@@ -53,18 +54,16 @@ public class MusicTrack {
 	
 	
 	public void play() throws MidiUnavailableException, InvalidMidiDataException, InterruptedException {
-		// TODO Auto-generated method stub
-
-
-
+		
+		double warmup = 1;
+		final MidiSequencePlayer player = new MidiSequencePlayer(120,64);
+		
 		for(Note note:notes) {
-			final MidiSequencePlayer player = new MidiSequencePlayer(120,64);
-			player.addNote(note.instrument(), note.pitch(), warmup, note.duration());
-			Thread.sleep(500);
-			player.play();
+			player.addNote(this.instrument, note.pitch(), warmup, note.duration());
+			//Thread.sleep(500);
+			warmup += 1;
 		}
-
-
+		player.play();
 	}
 
 }

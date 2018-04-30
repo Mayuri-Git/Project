@@ -84,20 +84,21 @@ System.out.println("The track has begun: " + trackTk);
     dur = jj_consume_token(DurationToken);
     jj_consume_token(R);
 System.out.println("The input Pitch is: " + pitch + " The input Duration is: " + dur);
+        char pitchChar = pitch.toString().charAt(0);
     switch(dur.toString())
     {
         case "w":
-        track.setDurations(1);
-        track.setPitches(new Pitch(pitch.toString().charAt(0)));
-        break;
+                track.notes.add(new Note(1, new Pitch(pitchChar)));
+                break;
         case "h":
-        track.setDurations(0.5);
-        track.setPitches(new Pitch(pitch.toString().charAt(0)));
-        break;
+                track.notes.add(new Note(0.5, new Pitch(pitchChar)));
+                break;
         case "q":
-        track.setDurations(0.25);
-        track.setPitches(new Pitch(pitch.toString().charAt(0)));
-        break;
+                track.notes.add(new Note(0.25, new Pitch(pitchChar)));
+                break;
+        default:
+                System.out.println("Invalid duration value: " + dur.toString());
+                break;
     }
     {if ("" != null) return track;}
     throw new Error("Missing return statement in function");
@@ -108,22 +109,9 @@ System.out.println("The input Pitch is: " + pitch + " The input Duration is: " +
     jj_consume_token(InstrumentIdToken);
     instType = jj_consume_token(InstrumentNumToken);
 System.out.println("The track will be played on " + instType + " Instrument");
-    for(int i=0; i < track.pitches.size(); i++)
-    {
-        switch(instType.toString().toLowerCase())
-        {
-            case "piano":
-            track.addNote(new Note(track.durations.get(i), track.pitches.get(i), MusicInstrument.PIANO));
-            break;
-            case "drums":
-            track.addNote(new Note(track.durations.get(i), track.pitches.get(i), MusicInstrument.STEEL_DRUMS));
-            break;
-            case "harmonica":
-            track.addNote(new Note(track.durations.get(i), track.pitches.get(i), MusicInstrument.HARMONICA));
-            break;
-        }
-    }
+
     try{
+    track.instrument = MusicInstrument.valueOf(instType.toString().toUpperCase());
     track.play();
     }catch(Exception e)
     {

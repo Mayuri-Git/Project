@@ -41,7 +41,6 @@ public class MidiSequencePlayer {
      *   channels and callbacks are non-null,
      *   channels does not contain value nextChannel
      */
-
     private void checkRep() {
         assert sequencer != null : "sequencer should be non-null";
         assert track != null : "track should be non-null";

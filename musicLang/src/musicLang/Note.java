@@ -7,7 +7,7 @@ public class Note {
     
     private final double duration;
     private final Pitch pitch;
-    private final MusicInstrument instrument;
+    private MusicInstrument instrument = null;
     
     private void checkRep() {
         assert duration >= 0;
@@ -25,6 +25,12 @@ public class Note {
         this.duration = duration;
         this.pitch = pitch;
         this.instrument = instrument;
+        checkRep();
+    }
+    
+    public Note(double duration, Pitch pitch) {
+        this.duration = duration;
+        this.pitch = pitch;
         checkRep();
     }
     

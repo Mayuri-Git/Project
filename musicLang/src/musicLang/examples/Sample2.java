@@ -12,7 +12,7 @@ import musicLang.Pitch;
 public class Sample2 {
 	
 	
-	public static void main(String args[]) throws MidiUnavailableException, InvalidMidiDataException {
+	public static void main(String args[]) throws MidiUnavailableException, InvalidMidiDataException, InterruptedException {
 		
 		MusicTrack track1 = new MusicTrack();
 		track1.addNote(new Note(1, new Pitch('C'), MusicInstrument.PIANO));
