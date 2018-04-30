@@ -3,6 +3,7 @@
 package musicLang.parser;
 import javax.sound.midi.MidiUnavailableException;
 import java.util.ArrayList;
+import musicLang.exceptions.*;
 import musicLang.*;
 
 /** Token Manager. */
@@ -77,10 +78,10 @@ static private int jjMoveNfa_0(int startState, int curPos)
             switch(jjstateSet[--i])
             {
                case 0:
-                  if ((0x7fffffeL & l) != 0L)
+                  if ((0x87fffffeL & l) != 0L)
                   {
-                     if (kind > 8)
-                        kind = 8;
+                     if (kind > 13)
+                        kind = 13;
                      { jjCheckNAdd(2); }
                   }
                   else if ((0x82010000000000L & l) != 0L)
@@ -88,16 +89,18 @@ static private int jjMoveNfa_0(int startState, int curPos)
                      if (kind > 9)
                         kind = 9;
                   }
+                  if ((0x7fffffeL & l) != 0L)
+                  {
+                     if (kind > 8)
+                        kind = 8;
+                  }
                   break;
                case 1:
-                  if ((0x7fffffeL & l) == 0L)
-                     break;
-                  if (kind > 8)
-                     kind = 8;
-                  { jjCheckNAdd(2); }
+                  if ((0x82010000000000L & l) != 0L)
+                     kind = 9;
                   break;
                case 2:
-                  if ((0x7fffffeL & l) == 0L)
+                  if ((0x87fffffeL & l) == 0L)
                      break;
                   if (kind > 13)
                      kind = 13;

@@ -4,13 +4,14 @@ package musicLang.parser;
 
 import javax.sound.midi.MidiUnavailableException;
 import java.util.ArrayList;
+import musicLang.exceptions.*;
 
 import musicLang.*;
 
 public class musiclang {
 
   /** Main entry point. */
-  public static void main(String args[]) throws ParseException, MidiUnavailableException {
+  public static void main(String args[]) throws ParseException, MidiUnavailableException, InvalidInstrumentException {
     if (args.length == 0)
     {
         System.out.println("Reading input from command line");
@@ -53,10 +54,10 @@ TOKEN :
 | < TrackToken: "@" >
 | < PlayToken: ">" >
 | < InstrumentIdToken: "i" >
-| < InstrumentNumToken: (["A"-"Z"])+ >
+| < InstrumentNumToken: (["A"-"Z","_"])+ >
 }
 
-void CompilationUnit() throws MidiUnavailableException:
+void CompilationUnit() throws MidiUnavailableException, InvalidInstrumentException:
 {MusicTrack track; }
 {
   track = TrackInput()
@@ -66,7 +67,7 @@ void CompilationUnit() throws MidiUnavailableException:
   {}
 }
 
-MusicTrack TrackInput() throws MidiUnavailableException:
+MusicTrack TrackInput() throws MidiUnavailableException, InvalidInstrumentException:
 {Token trackTk; MusicTrack track;}
 {
   trackTk=<TrackToken>
@@ -85,7 +86,7 @@ MusicTrack TrackInput() throws MidiUnavailableException:
     }
 }
 
-MusicTrack NoteInput(MusicTrack track) throws MidiUnavailableException:
+MusicTrack NoteInput(MusicTrack track) throws MidiUnavailableException, InvalidInstrumentException:
 {Token pitch; Token dur; Note note;}
 {
   <L> pitch=<PitchToken> <C> dur=<DurationToken> <R>
@@ -110,15 +111,19 @@ MusicTrack NoteInput(MusicTrack track) throws MidiUnavailableException:
   }
 }
 
-void PlayInput(MusicTrack track) throws MidiUnavailableException:
+void PlayInput(MusicTrack track) throws MidiUnavailableException, InvalidInstrumentException:
 {Token play; Token instType;}
 {
-  play=<PlayToken> <InstrumentIdToken> instType=<InstrumentNumToken>
+  try{
+  	play=<PlayToken> <InstrumentIdToken> instType=<InstrumentNumToken>
+  }catch(Exception e) {
+		throw new InvalidInstrumentException("Invalid Instrument Value. \nPlease refer to user manual for valid instrument values.");
+  }
   { System.out.println("The track will be played on " + instType + " Instrument");
   	
-    try{
-    track.instrument = MusicInstrument.valueOf(instType.toString().toUpperCase());
-    track.play();
+	track.instrument = MusicInstrument.valueOf(instType.toString().toUpperCase());
+	try{
+	    track.play();
     }catch(Exception e)
     {
         e.printStackTrace();

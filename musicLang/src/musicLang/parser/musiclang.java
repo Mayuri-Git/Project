@@ -4,13 +4,14 @@ package musicLang.parser;
 
 import javax.sound.midi.MidiUnavailableException;
 import java.util.ArrayList;
+import musicLang.exceptions.*;
 
 import musicLang.*;
 
 public class musiclang implements musiclangConstants {
 
   /** Main entry point. */
-  public static void main(String args[]) throws ParseException, MidiUnavailableException {
+  public static void main(String args[]) throws ParseException, MidiUnavailableException, InvalidInstrumentException {
     if (args.length == 0)
     {
         System.out.println("Reading input from command line");
@@ -31,7 +32,7 @@ public class musiclang implements musiclangConstants {
 
   }
 
-  static final public void CompilationUnit() throws ParseException, MidiUnavailableException {MusicTrack track;
+  static final public void CompilationUnit() throws ParseException, MidiUnavailableException, InvalidInstrumentException {MusicTrack track;
     track = TrackInput();
     label_1:
     while (true) {
@@ -63,7 +64,7 @@ public class musiclang implements musiclangConstants {
 
   }
 
-  static final public MusicTrack TrackInput() throws ParseException, MidiUnavailableException {Token trackTk; MusicTrack track;
+  static final public MusicTrack TrackInput() throws ParseException, MidiUnavailableException, InvalidInstrumentException {Token trackTk; MusicTrack track;
     trackTk = jj_consume_token(TrackToken);
 System.out.println("The track has begun: " + trackTk);
     try{
@@ -77,7 +78,7 @@ System.out.println("The track has begun: " + trackTk);
     throw new Error("Missing return statement in function");
   }
 
-  static final public MusicTrack NoteInput(MusicTrack track) throws ParseException, MidiUnavailableException {Token pitch; Token dur; Note note;
+  static final public MusicTrack NoteInput(MusicTrack track) throws ParseException, MidiUnavailableException, InvalidInstrumentException {Token pitch; Token dur; Note note;
     jj_consume_token(L);
     pitch = jj_consume_token(PitchToken);
     jj_consume_token(C);
@@ -96,7 +97,7 @@ System.out.println("The input Pitch is: " + pitch + " The input Duration is: " +
         case "q":
                 track.notes.add(new Note(0.25, new Pitch(pitchChar)));
                 break;
-        default:
+            default:
                 System.out.println("Invalid duration value: " + dur.toString());
                 break;
     }
@@ -104,15 +105,19 @@ System.out.println("The input Pitch is: " + pitch + " The input Duration is: " +
     throw new Error("Missing return statement in function");
   }
 
-  static final public void PlayInput(MusicTrack track) throws ParseException, MidiUnavailableException {Token play; Token instType;
-    play = jj_consume_token(PlayToken);
-    jj_consume_token(InstrumentIdToken);
-    instType = jj_consume_token(InstrumentNumToken);
+  static final public void PlayInput(MusicTrack track) throws ParseException, MidiUnavailableException, InvalidInstrumentException {Token play; Token instType;
+    try {
+      play = jj_consume_token(PlayToken);
+      jj_consume_token(InstrumentIdToken);
+      instType = jj_consume_token(InstrumentNumToken);
+    } catch (Exception e) {
+{if (true) throw new InvalidInstrumentException("Invalid Instrument Value. \u005cnPlease refer to user manual for valid instrument values.");}
+    }
 System.out.println("The track will be played on " + instType + " Instrument");
 
-    try{
-    track.instrument = MusicInstrument.valueOf(instType.toString().toUpperCase());
-    track.play();
+        track.instrument = MusicInstrument.valueOf(instType.toString().toUpperCase());
+        try{
+            track.play();
     }catch(Exception e)
     {
         e.printStackTrace();
