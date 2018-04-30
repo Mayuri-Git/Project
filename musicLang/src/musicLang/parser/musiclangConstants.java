@@ -28,6 +28,8 @@ public interface musiclangConstants {
   int InstrumentIdToken = 12;
   /** RegularExpression Id. */
   int InstrumentNumToken = 13;
+  /** RegularExpression Id. */
+  int CommentToken = 14;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -48,6 +50,7 @@ public interface musiclangConstants {
     "\">\"",
     "\"i\"",
     "<InstrumentNumToken>",
+    "<CommentToken>",
   };
 
 }

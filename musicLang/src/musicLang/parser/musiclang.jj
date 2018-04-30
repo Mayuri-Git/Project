@@ -57,6 +57,11 @@ TOKEN :
 | < InstrumentNumToken: (["A"-"Z","_"])+ >
 }
 
+SPECIAL_TOKEN :
+{
+< CommentToken: "#" (~["\n", "\r"])* ("\n" | "\r" | "\r\n")?>
+}
+
 void CompilationUnit() throws MidiUnavailableException, InvalidInstrumentException:
 {MusicTrack track; }
 {
