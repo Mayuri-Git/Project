@@ -25,11 +25,12 @@ public class MusicTrack {
 	public List<Double> durations = new ArrayList<Double>();
 	public List<Note> notes = new ArrayList<Note>();
 	public MusicInstrument instrument = null;
+	public double warmup;
 	
 	private Sequence sequence;
 	
 	public MusicTrack() throws MidiUnavailableException, InvalidMidiDataException {
-
+		this.warmup = 1;
 	}
 	
 	public void addNote(Note n) {
@@ -59,9 +60,9 @@ public class MusicTrack {
 		final MidiSequencePlayer player = new MidiSequencePlayer(120,64);
 		
 		for(Note note:notes) {
-			player.addNote(this.instrument, note.pitch(), warmup, note.duration());
+			player.addNote(this.instrument, note.pitch(), this.warmup, note.duration());
 			//Thread.sleep(500);
-			warmup += 1;
+			this.warmup += 1;
 		}
 		player.play();
 	}
