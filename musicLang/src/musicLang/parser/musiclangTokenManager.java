@@ -118,7 +118,7 @@ static private int jjMoveNfa_0(int startState, int curPos)
                      if (kind > 9)
                         kind = 9;
                   }
-                  if ((0x7fffffeL & l) != 0L)
+                  if ((0xfeL & l) != 0L)
                   {
                      if (kind > 8)
                         kind = 8;

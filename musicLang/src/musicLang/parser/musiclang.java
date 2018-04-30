@@ -111,11 +111,17 @@ System.out.println("The input Pitch is: " + pitch + " The input Duration is: " +
       jj_consume_token(InstrumentIdToken);
       instType = jj_consume_token(InstrumentNumToken);
     } catch (Exception e) {
-{if (true) throw new InvalidInstrumentException("Invalid Instrument Value. \u005cnPlease refer to user manual for valid instrument values.");}
+{if (true) throw new InvalidInstrumentException("\u005cnInvalid Instrument Value. \u005cnPlease refer to user manual for valid instrument values.");}
     }
 System.out.println("The track will be played on " + instType + " Instrument");
 
-        track.instrument = MusicInstrument.valueOf(instType.toString().toUpperCase());
+        try{
+                track.instrument = MusicInstrument.valueOf(instType.toString().toUpperCase());
+        }
+        catch(Exception e) {
+                {if (true) throw new InvalidInstrumentException("\u005cnInvalid Instrument Value. \u005cnPlease refer to user manual for valid instrument values.");}
+        }
+
         try{
             track.play();
     }catch(Exception e)
