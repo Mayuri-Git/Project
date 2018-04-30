@@ -1,5 +1,10 @@
 package musicLang;
 
+/**
+ * MusicInstrument enum represents instruments from MIDI specification.
+ * @author Mayuri Wadkar, Parth Vyas
+ *
+ */
 public enum MusicInstrument {
 	 	PIANO,
 	    BRIGHT_PIANO,

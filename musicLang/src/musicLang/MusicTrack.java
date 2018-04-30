@@ -8,38 +8,60 @@ import javax.sound.midi.MidiUnavailableException;
 
 import musicLang.MusicInstrument;
 
+/**
+ * MusicTrack class represents a track which is comprised of sequence of notes
+ * A track can be played using instrument specified.
+ * @author Mayuri Wadkar, Parth Vyas
+ *
+ */
 public class MusicTrack {
-	public List<Pitch> pitches = new ArrayList<Pitch>();
-	public List<Double> durations = new ArrayList<Double>();
 	public List<Note> notes = new ArrayList<Note>();
 	public MusicInstrument instrument = null;
 	public double warmup;
 	
+	/**
+	 * MusicTrack constructor
+	 * @throws MidiUnavailableException
+	 * @throws InvalidMidiDataException
+	 */
 	public MusicTrack() throws MidiUnavailableException, InvalidMidiDataException {
 		this.warmup = 1;
 	}
 	
+	public List<Note> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<Note> notes) {
+		this.notes = notes;
+	}
+
+	public MusicInstrument getInstrument() {
+		return instrument;
+	}
+
+	public void setInstrument(MusicInstrument instrument) {
+		this.instrument = instrument;
+	}
+
+	public double getWarmup() {
+		return warmup;
+	}
+
+	public void setWarmup(double warmup) {
+		this.warmup = warmup;
+	}
+
 	public void addNote(Note n) {
 		this.notes.add(n);
 	}
 
-	public List<Pitch> getPitches() {
-		return pitches;
-	}
-
-	public List<Double> getDurations() {
-		return durations;
-	}
-
-	public void setPitches(Pitch p) {
-		this.pitches.add(p);
-	}
-
-	public void setDurations(double d) {
-		this.durations.add(d);
-	}
-	
-	
+	/**
+	 * The play function sequentially plays notes stored in notes array
+	 * @throws MidiUnavailableException
+	 * @throws InvalidMidiDataException
+	 * @throws InterruptedException
+	 */
 	public void play() throws MidiUnavailableException, InvalidMidiDataException, InterruptedException {
 		
 		final MidiSequencePlayer player = new MidiSequencePlayer(120,64);
@@ -50,5 +72,4 @@ public class MusicTrack {
 		}
 		player.play();
 	}
-
 }

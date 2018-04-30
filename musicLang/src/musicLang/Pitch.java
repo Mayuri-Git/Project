@@ -1,30 +1,14 @@
 package musicLang;
 
 /**
- * Pitch is an immutable type representing the frequency of a musical note.
- * Standard music notation represents pitches by letters: A, B, C, ..., G.
- * Pitches can be sharp or flat, or whole octaves up or down from these
- * primitive generators.
+ * Pitch class represents the frequency of a musical note.
+ * These frequencies are represented by letters: A-G.
+ * @author Mayuri Wadkar, Parth Vyas
  * 
- * <p> For example:
- * <br> new Pitch('C') makes middle C
- * <br> new Pitch('C').transpose(1) makes C-sharp
- * <br> new Pitch('E').transpose(-1) makes E-flat
- * <br> new Pitch('C').transpose(OCTAVE) makes high C
- * <br> new Pitch('C').transpose(-OCTAVE) makes low C
  */
 public class Pitch {
 
     private final int value;
-
-    /*
-     * Rep invariant: true.
-     *
-     * Abstraction function AF(value): 
-     *   AF(0),...,AF(12) map to middle C, C-sharp, D, ..., A, A-sharp, B.
-     *   AF(i+12n) maps to n octaves above middle AF(i)
-     *   AF(i-12n) maps to n octaves below middle AF(i)
-     */
 
     private static final int[] SCALE = {
         9,  // A
@@ -49,15 +33,14 @@ public class Pitch {
     }
 
     /**
-     * Make a Pitch named c in the middle octave of the piano keyboard.
-     * For example, new Pitch('C') constructs middle C.
-     * @param c letter in {'A',...,'G'}
+     * Make a pitch in the middle octave of the piano keyboard.
+     * @param pitchChar letter in {'A',...,'G'}
      */
-    public Pitch(char c) {
+    public Pitch(char pitchChar) {
         try {
-            value = SCALE[c-'A'];
+            value = SCALE[pitchChar-'A'];
         } catch (ArrayIndexOutOfBoundsException aioobe) {
-            throw new IllegalArgumentException(c + " must be in the range A-G");
+            throw new IllegalArgumentException(pitchChar + " must be in the range A-G");
         }
     }
 
